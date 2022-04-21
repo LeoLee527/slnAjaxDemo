@@ -20,28 +20,42 @@ namespace prjAjAx.Controllers
         public IActionResult Index(string Name, int Age)
         {
             //System.Threading.Thread.Sleep(5000);
-            
-            var data = _constr.Members.FirstOrDefault(m => m.Name == Name && m.Age == Age);
-            if(data != null)
+
+            if (_constr.Members.Any(m => m.Name == Name && m.Age == Age))
             {
-                Member mem = new Member();
-                mem.Name = Name;
-                mem.Age = Age;
-                _constr.Members.Add(mem);
-                _constr.SaveChanges();
-                return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
+                Name = "Ajax";
+                Age = 5;
             }
             else
             {
-                return View();
+
             }
-                        
-            //if (string.IsNullOrEmpty(name))
+            return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
+
+
+
+            //var data = _constr.Members.FirstOrDefault(m => m.Name == Name && m.Age == Age);
+            //if(data != null)
             //{
-            //    name = "Ajax";
-            //    age = "5";
+            //    Member mem = new Member();
+            //    mem.Name = Name;
+            //    mem.Age = Age;
+            //    _constr.Members.Add(mem);
+            //    _constr.SaveChanges();
+            //    return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
             //}
-            //return Content($"Hello { name }, You are { age } years old.", "text/plain", System.Text.Encoding.UTF8);
+            //else
+            //{
+            //    return View();
+            //}
+
+            //if (string.IsNullOrEmpty(Name))
+            //{
+            //    Name = "Ajax";
+            //    Age = 5;
+            //}
+            //return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
+
         }
     }
 }
