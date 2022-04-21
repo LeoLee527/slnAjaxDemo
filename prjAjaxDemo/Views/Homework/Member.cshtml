@@ -1,4 +1,6 @@
-﻿@{
+﻿@model prjAjaxDemo.Models.Member
+
+@{
     ViewData["Title"] = "Member";
 }
 
@@ -22,14 +24,14 @@
 
         btn.addEventListener("click", () => {
             xhr.open("GET", `/api/index?name=${inpu1.value}&age=${inpu2.value}`); 
-            xhr.timeout = 5000;
+            @*xhr.timeout = 5000;*@
             xhr.send();           
             xhr.addEventListener("load", () => {
                 divmessage.innerHTML = xhr.responseText;
-                console.log("load");
+                @*console.log("load");*@
             })
             
-            xhr.addEventListener("loadstart", () => {
+            @*xhr.addEventListener("loadstart", () => {
                 console.log("loadstart");
                 btn.value = "loading...";
                 btn.setAttribute("disabled", "disabled")
@@ -39,9 +41,9 @@
                 console.log("loadend");
                 btn.value = "load";
                 btn.removeAttribute("disabled")
-            })
+            })*@
             
-            xhr.addEventListener("timeout", () => {
+            @*xhr.addEventListener("timeout", () => {
                 console.log("timeout");
                 divmessage.innerHTML = "伺服器忙碌中.....";
             })
@@ -49,11 +51,11 @@
             xhr.addEventListener("abort", () => {
                 console.log("abort");
                 divmessage.innerHTML = "取消這次的執行.....";
-            })
+            })*@
         })
         
-        btnstop.addEventListener("click", () => {
+        @*btnstop.addEventListener("click", () => {
             xhr.abort();
-        })
+        })*@
     </script>
 }

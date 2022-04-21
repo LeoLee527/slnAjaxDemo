@@ -26,18 +26,9 @@ namespace prjAjaxDemo.Controllers
             return View();
         }
 
-        public IActionResult Member(string name)
+        public IActionResult Member()
         {
-            var datas = _constr.Members.Where(m => m.Name == name).FirstOrDefault();
-            if (datas != null)
-            {
-
-                return RedirectToAction("Member", "Homework");
-            }
-            else
-            {
-                return RedirectToAction("Home", "Homework");
-            }
+            return View();
         }
     }
 }

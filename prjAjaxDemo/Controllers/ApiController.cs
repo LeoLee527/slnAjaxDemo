@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using prjAjAx.Models;
+using prjAjaxDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +10,38 @@ namespace prjAjAx.Controllers
 {
     public class ApiController : Controller
     {
-        private readonly DemoContext _context;
+         private readonly DemoContext _constr;
 
-        public ApiController(DemoContext context)
+        public ApiController(DemoContext constr)
         {
-            _context = context;
+            _constr = constr;
         }
 
-        public IActionResult Index(string name, string age)
+        public IActionResult Index(string Name, int Age)
         {
-            System.Threading.Thread.Sleep(5000);
-            if(string.IsNullOrEmpty(name))
+            //System.Threading.Thread.Sleep(5000);
+            
+            var data = _constr.Members.FirstOrDefault(m => m.Name == Name && m.Age == Age);
+            if(data != null)
             {
-                name = "Ajax";
-                age = "5";
+                Member mem = new Member();
+                mem.Name = Name;
+                mem.Age = Age;
+                _constr.Members.Add(mem);
+                _constr.SaveChanges();
+                return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
             }
-            return Content($"Hello { name }, You are { age } years old.", "text/plain", System.Text.Encoding.UTF8);//System.Text.Encoding.UTF8 避免傳中文為亂碼
+            else
+            {
+                return View();
+            }
+                        
+            //if (string.IsNullOrEmpty(name))
+            //{
+            //    name = "Ajax";
+            //    age = "5";
+            //}
+            //return Content($"Hello { name }, You are { age } years old.", "text/plain", System.Text.Encoding.UTF8);
         }
     }
 }
