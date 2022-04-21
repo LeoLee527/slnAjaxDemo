@@ -42,7 +42,6 @@ namespace prjAjAx.Controllers
             //    Age = 5;
             //}
             //return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
-
         }
     }
 }
