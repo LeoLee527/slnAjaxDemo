@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Member";
 }
 
@@ -18,44 +17,41 @@
         const btnstop = document.querySelector("#button2");
         const divmessage = document.querySelector("#div1");
         const inpu1 = document.querySelector("#inp1");
-        const inpu2 = document.querySelector("#inp2");
-        //1.建立Ajax物件
+        const inpu2 = document.querySelector("#inp2"); 
         const xhr = new XMLHttpRequest();
+
         btn.addEventListener("click", () => {
-            //2.對伺服器發出要求(Request)
-            xhr.open("GET", `/api/index?name=${inpu1.value}&age=${inpu2.value}`); // 打開瀏覽器輸入網址      /api/index -> controller/action
-            xhr.timeout = 5000;//超過時間伺服器沒有回應 停止程式的執行
-            xhr.send();//按下Enter鍵
-            //3.接收伺服器回傳的結果(Reponse)
-            //load事件表示伺服器已經回傳結果到Client端
+            xhr.open("GET", `/api/index?name=${inpu1.value}&age=${inpu2.value}`); 
+            xhr.timeout = 5000;
+            xhr.send();           
             xhr.addEventListener("load", () => {
-                divmessage.innerHTML = xhr.responseText;//responseText:接收文字屬性(string、json)  responseXML(XML)接收結果顯示在div中
+                divmessage.innerHTML = xhr.responseText;
                 console.log("load");
             })
-            //ajax開始
+            
             xhr.addEventListener("loadstart", () => {
                 console.log("loadstart");
                 btn.value = "loading...";
                 btn.setAttribute("disabled", "disabled")
             })
-            //ajax結束
+            
             xhr.addEventListener("loadend", () => {
                 console.log("loadend");
                 btn.value = "load";
                 btn.removeAttribute("disabled")
             })
-            //timeout設定時間到了 伺服器還沒傳回結果
+            
             xhr.addEventListener("timeout", () => {
                 console.log("timeout");
                 divmessage.innerHTML = "伺服器忙碌中.....";
             })
-            //abort 觸發abort事件
+            
             xhr.addEventListener("abort", () => {
                 console.log("abort");
                 divmessage.innerHTML = "取消這次的執行.....";
             })
         })
-        //使用者可以取消程式的執行
+        
         btnstop.addEventListener("click", () => {
             xhr.abort();
         })

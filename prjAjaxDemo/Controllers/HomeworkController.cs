@@ -15,6 +15,12 @@ namespace prjAjaxDemo.Controllers
         {
             _constr = constr;
         }
+
+        public IActionResult Home()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -22,8 +28,16 @@ namespace prjAjaxDemo.Controllers
 
         public IActionResult Member(string name)
         {
-            _constr.Members.Where(m => m.Name == name).FirstOrDefault();
-            return View();
+            var datas = _constr.Members.Where(m => m.Name == name).FirstOrDefault();
+            if (datas != null)
+            {
+
+                return RedirectToAction("Member", "Homework");
+            }
+            else
+            {
+                return RedirectToAction("Home", "Homework");
+            }
         }
     }
 }
