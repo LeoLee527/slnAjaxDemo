@@ -21,33 +21,20 @@ namespace prjAjAx.Controllers
         {
             //System.Threading.Thread.Sleep(5000);
 
-            if (_constr.Members.Any(m => m.Name == Name && m.Age == Age))
+            var data = _constr.Members.FirstOrDefault(m => m.Name == Name && m.Age == Age);
+            if (data != null)
             {
-                Name = "Ajax";
-                Age = 5;
+                Member mem = new Member();
+                mem.Name = Name;
+                mem.Age = Age;
+                _constr.Members.Add(mem);
+                _constr.SaveChanges();
+                return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
             }
             else
             {
-
+                return View();
             }
-            return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
-
-
-
-            //var data = _constr.Members.FirstOrDefault(m => m.Name == Name && m.Age == Age);
-            //if(data != null)
-            //{
-            //    Member mem = new Member();
-            //    mem.Name = Name;
-            //    mem.Age = Age;
-            //    _constr.Members.Add(mem);
-            //    _constr.SaveChanges();
-            //    return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
-            //}
-            //else
-            //{
-            //    return View();
-            //}
 
             //if (string.IsNullOrEmpty(Name))
             //{

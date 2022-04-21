@@ -26,7 +26,7 @@
             xhr.open("GET", `/api/index?name=${inpu1.value}&age=${inpu2.value}`); 
             @*xhr.timeout = 5000;*@
             xhr.send();           
-            xhr.addEventListener("load", () => {
+            xhr.addEventListener("load", () => { 
                 divmessage.innerHTML = xhr.responseText;
                 @*console.log("load");*@
             })
