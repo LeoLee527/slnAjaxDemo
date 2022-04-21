@@ -23,7 +23,7 @@
         const xhr = new XMLHttpRequest();
 
         btn.addEventListener("click", () => {
-            xhr.open("GET", `/api/index?name=${inpu1.value}&age=${inpu2.value}`); 
+            xhr.open("GET", `/api/CheckName?name=${inpu1.value}&age=${inpu2.value}`);
             @*xhr.timeout = 5000;*@
             xhr.send();           
             xhr.addEventListener("load", () => { 

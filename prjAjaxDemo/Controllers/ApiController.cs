@@ -27,8 +27,8 @@ namespace prjAjAx.Controllers
                 Member mem = new Member();
                 mem.Name = Name;
                 mem.Age = Age;
-                _constr.Members.Add(mem);
-                _constr.SaveChanges();
+                //_constr.Members.Add(mem);
+                //_constr.SaveChanges();
                 return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
             }
             else
@@ -42,6 +42,20 @@ namespace prjAjAx.Controllers
             //    Age = 5;
             //}
             //return Content($"Hello { Name }, You are { Age } years old.", "text/plain", System.Text.Encoding.UTF8);
+        }
+
+        public IActionResult CheckName(string name, int age)
+        {
+            Member mem = _constr.Members.FirstOrDefault(p => p.Name == name || p.Age == age);
+            if(mem != null)
+            {
+                return Content("有找到這個人~", "text/plain", System.Text.Encoding.UTF8);
+            }
+            else
+            {
+                return Content("沒有找到這個人~", "text/plain", System.Text.Encoding.UTF8);
+            }
+            
         }
     }
 }
